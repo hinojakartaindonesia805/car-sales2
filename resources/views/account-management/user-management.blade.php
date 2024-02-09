@@ -61,6 +61,23 @@
                                           @enderror
                                         </div>
                                         <div class="mb-3">
+                                            <label for="">NIK</label> 
+                                        <input type="number" class="form-control" placeholder="NIK" name="nik" id="nik" aria-label="nik" aria-describedby="email-addon" value="{{ old('nik')}}">
+                                        @error('nik')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="">Jenis Kelamin</label>
+                                            <select name="jenis_kelamin" class="form-control" id="" required>
+                                                <option value="Laki-Laki">Laki-Laki</option>
+                                                <option value="Perempuan">Perempuan</option>
+                                            </select>
+                                            @error('jenis_kelamin')
+                                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="">Email</label>
                                           <input type="email" class="form-control" placeholder="Email" name="email" id="email" aria-label="Email" aria-describedby="email-addon" value="{{ old('email') }}">
                                           @error('email')
@@ -71,8 +88,7 @@
                                             <label for="">Role</label>
                                             <select name="role" class="form-control" id="" required>
                                                 <option value="Admin">Admin</option>
-                                                <option value="Pengurus">Pengurus</option>
-                                                <option value="User">User</option>
+                                                <option value="Santri">Santri</option>
                                             </select>
                                           @error('password')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -112,6 +128,12 @@
                                         Name
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        NIK
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Jenis Kelamin
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Email
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -134,6 +156,12 @@
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->nik }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_kelamin }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->email }}</p>
@@ -193,11 +221,27 @@
                 @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="">NIK</label> 
+                <input type="number" class="form-control" placeholder="NIK" name="nik" id="nik" aria-label="nik" aria-describedby="email-addon" value="{{ old('nik') ?? $item2->nik }}">
+                @error('nik')
+                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="">Jenis Kelamin</label>
+                    <select name="jenis_kelamin" class="form-control" id="" required>
+                        <option value="Laki-Laki" {{ $item2->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                        <option value="Perempuan" {{ $item2->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
+                    @error('jenis_kelamin')
+                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="">Role</label>
                     <select name="role" class="form-control" id="" required>
                         <option value="Admin" {{ $item2->role == 'Admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="Pengurus" {{ $item2->role == 'Pengurus' ? 'selected' : '' }}>Pengurus</option>
-                        <option value="User" {{ $item2->role == 'User' ? 'selected' : '' }}>User</option>
+                        <option value="Santri" {{ $item2->role == 'Santri' ? 'selected' : '' }}>Santri</option>
                     </select>
                 @error('password')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>

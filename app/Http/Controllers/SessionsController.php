@@ -21,11 +21,14 @@ class SessionsController extends Controller
             'password'=>'required' 
         ]);
 
-        // dd(Auth::attempt($attributes));
         if(Auth::attempt($attributes))
         {
             session()->regenerate();
-            return redirect('dashboard')->with(['success'=>'You are logged in.']);
+            if (Auth::user()->role == 'Santri') {
+                return redirect('/')->with(['success'=>'You are logged in.']);
+            }else{
+                return redirect('dashboard')->with(['success'=>'You are logged in.']);
+            }
         }
         else{
 
@@ -38,6 +41,6 @@ class SessionsController extends Controller
 
         Auth::logout();
 
-        return redirect('/login')->with(['success'=>'You\'ve been logged out.']);
+        return redirect('/')->with(['success'=>'You\'ve been logged out.']);
     }
 }

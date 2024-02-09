@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/logo-kopi.png')}}">
   <link rel="icon" type="image/png" href="{{asset('assets/img/logo-kopi.png')}}">
   <title>
-    Dashboard Sekertaris - {{ str_replace('-', ' ', Request::path()) }}
+    Dashboard Voting - {{ str_replace('-', ' ', Request::path()) }}
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -38,6 +38,12 @@
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <style>
+    .btn-primary{
+      background-image: linear-gradient(310deg,aqua,blue);
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100 {{ (\Request::is('rtl') ? 'rtl' : (Request::is('virtual-reality') ? 'virtual-reality' : '')) }} ">

@@ -2,15 +2,28 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<div class="row">
+  <div class="col-lg-4">
+      <select name="" id="kegiatan-input" class="form-control">
+        @foreach ($kegiatan_all as $item)
+            <option value="{{ $item->id }}">{{ $item->kegiatan.' '.$item->tahun }}</option>
+        @endforeach
+      </select>
+  </div>
+  <div class="col-lg-3">
+    <button class="btn btn-primary" onclick="filter()">Filter</button>
+  </div>
+
+</div>
   <div class="row mt-4">
       <div class="col-lg-12 mb-lg-0 mb-4">
-        <div class="card" style="background: green">
+        <div class="card" style="background-image: linear-gradient(310deg,aqua,blue)">
           <div class="card-body p-3">
             <div class="row">
               <div class="col-lg-12">
                 <div class="d-flex flex-column h-100">
                   <center>
-                    <h2 class="font-weight-bolder" style="color: white">Selamat Datang di Dashboard Booking Sekertaris</h2>
+                    <h2 class="font-weight-bolder" style="color: white">Selamat Datang di Dashboard Voting</h2>
                   </center>
                 </div>
               </div>
@@ -18,8 +31,92 @@
           </div>
         </div>
       </div>
-    
   </div>
+  <div class="row mt-4">
+      <div class="col-lg-3 mb-lg-0 mb-4">
+        <div class="card" style="background:red">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="d-flex flex-column h-100">
+                  <center>
+                    <h2 class="font-weight-bolder" style="color: white">Data Santri</h2>
+                    <h1 class="font-weight-bolder" style="color: white">{{ $santri }}</h1>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-lg-0 mb-4">
+        <div class="card" style="background:blue">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="d-flex flex-column h-100">
+                  <center>
+                    <h2 class="font-weight-bolder" style="color: white">Data Kegiatan</h2>
+                    <h1 class="font-weight-bolder" style="color: white">{{ $kegiatan }}</h1>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-lg-0 mb-4">
+        <div class="card" style="background:orange">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="d-flex flex-column h-100">
+                  <center>
+                    <h2 class="font-weight-bolder" style="color: white">Data Kandidat</h2>
+                    <h1 class="font-weight-bolder" style="color: white">{{ $kandidat }}</h1>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-lg-0 mb-4">
+        <div class="card" style="background:green">
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="d-flex flex-column h-100">
+                  <center>
+                    <h2 class="font-weight-bolder" style="color: white">Data Suara</h2>
+                    <h1 class="font-weight-bolder" style="color: white">{{ $suara }}</h1>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div id="pie"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <div id="chartQuick"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
  
 
@@ -37,9 +134,7 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 
-  <script>
-
-
+<script>
 $(document).ready(function () {
         $('#myDataTable').DataTable();
         $('#myDataTable2').DataTable();
@@ -51,6 +146,165 @@ $("#datepicker").datepicker({
     viewMode: "years", 
     minViewMode: "years"
 });
+  </script>
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
+<script>
+  $(document).ready(function() {
+    filter()
+    setInterval(filter, 5000);
+    // setInterval(syncData2, 5000);
+  });
+
+  function filter() {
+      let kegiatan = $('#kegiatan-input').val();
+      console.log(kegiatan);
+
+      syncData(kegiatan);
+      syncData2(kegiatan);
+  }
+  
+  function syncData(kegiatan) {
+    var formData = {
+      
+    };
+  
+    console.log(formData);
+    $.ajax({
+        type: 'GET',
+        url: '{{ url("hasil-json") }}'+'/'+kegiatan,
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+  
+            if (data.msg == 'berhasil') {
+                updateChart(data);
+            }
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            // Handle respon dari server jika terjadi kesalahan
+            console.error(xhr.responseText);
+        }
+    });
+  }
+  function syncData2(kegiatan) {
+    var formData = {
+      
+    };
+  
+    console.log(formData);
+    $.ajax({
+        type: 'GET',
+        url: '{{ url("hasil-json") }}'+'/'+kegiatan,
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+  
+            if (data.msg == 'berhasil') {
+                updatePie(data);
+            }
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            // Handle respon dari server jika terjadi kesalahan
+            console.error(xhr.responseText);
+        }
+    });
+  }
+  
+  function updateChart(data) {
+    // Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
+    Highcharts.chart('chartQuick', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'QuickCount Perolehan Suara'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: data.tanggal,
+            accessibility: {
+                description: 'Months of the year'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Suara'
+            },
+            labels: {
+                format: ''
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+        series: data.series1
+    });
+  }
+  
+  function updatePie(data) {
+    console.log(data.series2);
+    // Data retrieved from https://netmarketshare.com/
+    // Build the chart
+    Highcharts.chart('pie', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'QuickCount Perolehan Suara',
+            align: 'left'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: ''
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Total Suara',
+            colorByPoint: true,
+            data: data.series2
+        }]
+    });
+  }
+  
+  
   </script>
 @endpush
 

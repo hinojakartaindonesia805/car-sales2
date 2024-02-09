@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">{{ __('Foto Profile') }}</label>
                                 <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                    <input class="form-control"  type="file" placeholder="Name" id="user-name" name="foto" required>
+                                    <input class="form-control"  type="file" placeholder="Name" id="user-name" name="foto">
                                         @error('foto')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -129,30 +129,32 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="user.phone" class="form-control-label">{{ __('Phone') }}</label>
-                                <div class="@error('user.phone')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="tel" placeholder="40770888444" id="number" name="phone" value="{{ auth()->user()->phone }}">
-                                        @error('phone')
+                                <label for="user.location" class="form-control-label">{{ __('NIK') }}</label>
+                                <div class="@error('nik') border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="number" placeholder="nik" id="name" name="nik" value="{{ auth()->user()->nik }}">
+                                </div>
+                            </div>
+                            @error('nik')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user.phone" class="form-control-label">{{ __('Jenis Kelamin') }}</label>
+                                <div class="@error('Jenis_Kelamin')border border-danger rounded-3 @enderror">
+                                        <select name="jenis_kelamin" class="form-control" id="" required>
+                                            <option value="Laki-Laki" {{ auth()->user()->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                                            <option value="Perempuan" {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        </select>
+                                        @error('jenis_kelamin')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user.location" class="form-control-label">{{ __('Location') }}</label>
-                                <div class="@error('user.location') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Location" id="name" name="location" value="{{ auth()->user()->location }}">
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
-                    <div class="form-group">
-                        <label for="about">{{ 'About Me' }}</label>
-                        <div class="@error('user.about')border border-danger rounded-3 @enderror">
-                            <textarea class="form-control" id="about" rows="3" placeholder="Say something about yourself" name="about_me">{{ auth()->user()->about_me }}</textarea>
-                        </div>
-                    </div>
+                  
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>
                     </div>

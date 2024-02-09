@@ -14,22 +14,25 @@ class RegisterController extends Controller
         return view('session.register');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
-            'password' => ['required', 'min:5', 'max:20'],
-            'role' => ['required'],
-            'agreement' => ['accepted']
-        ]);
-        $attributes['password'] = bcrypt($attributes['password'] );
+       
+        try {
+            $attributes = request()->validate([
+                'name' => ['required', 'max:50'],
+                'role' => ['required'],
+                'nik' => ['required'],
+                'jenis_kelamin' => ['required'],
+                'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
+                'password' => ['required', 'min:5', 'max:20'],
+            ]);
+            
+            $attributes['password'] = bcrypt($attributes['password'] );
+            User::create($attributes);  
 
-        
-
-        session()->flash('success', 'Your account has been created.');
-        $user = User::create($attributes);
-        Auth::login($user); 
-        return redirect('/dashboard');
+            return redirect()->back()->with('success','Berhasil Register!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('failed','Gagal Register');
+        }
     }
 }
