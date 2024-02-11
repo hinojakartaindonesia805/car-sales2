@@ -26,6 +26,7 @@ class RegisterController extends Controller
             $new->jenis_kelamin = $request->jenis_kelamin;
             $new->age = $request->age;
             $new->email = $request->email;
+            $new->referal_code = $request->referal_code;
             $new->password = bcrypt($request->password);
     
             if ($new->save()) {

@@ -36,7 +36,7 @@
             overflow: hidden;
             width: 768px;
             max-width: 100%;
-            min-height: 480px;
+            min-height: 528px;
         }
 
         .container p{
@@ -271,7 +271,7 @@
 
     <div class="container" id="container">
     
-        <div class="form-container scrollable-container sign-up">
+        <div class="form-container  sign-up">
          
           @php
               $tipe_bisnis = array(
@@ -339,6 +339,7 @@
     						<input type="email" name="email" placeholder="Email"  required/>
     						<input type="number" name="age" placeholder="Usia" required />
                 <input type="password" name="password" placeholder="Password" required/>
+                <input type="text" name="referal_code" placeholder="Referal Code" required/>
                 <button type="submit">Sign Up</button>
             </form>
         </div>

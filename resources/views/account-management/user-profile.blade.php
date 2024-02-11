@@ -224,7 +224,7 @@
                 </form>
             </div>
         </div>
-        @if (Auth::user()->role == 'Agensi' || Auth::user()->role == 'Sekertaris' )
+        @if (Auth::user()->role == 'Agensi')
         @if(session('need_referal'))
             <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
                 <span class="alert-text text-white">
