@@ -21,10 +21,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nik',
         'jenis_kelamin',
         'role',
         'foto',
+        'age',
+        'referal_base',
+        'referal_code',
+        'bisnis_type',
+        'linkedin',
+        'vidio_diri',
+        'tentang_diri',
     ];
 
     /**

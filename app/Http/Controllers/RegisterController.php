@@ -16,23 +16,25 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
        
         try {
-            $attributes = request()->validate([
-                'name' => ['required', 'max:50'],
-                'role' => ['required'],
-                'nik' => ['required'],
-                'jenis_kelamin' => ['required'],
-                'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
-                'password' => ['required', 'min:5', 'max:20'],
-            ]);
-            
-            $attributes['password'] = bcrypt($attributes['password'] );
-            User::create($attributes);  
-
-            return redirect()->back()->with('success','Berhasil Register!');
+            $new = new User();
+            $new->name = $request->name;
+            $new->role = $request->role;
+            $new->bisnis_tipe = $request->tipe_bisnis;
+            $new->jenis_kelamin = $request->jenis_kelamin;
+            $new->age = $request->age;
+            $new->email = $request->email;
+            $new->password = bcrypt($request->password);
+    
+            if ($new->save()) {
+                return redirect()->back()->with('success','Berhasil Register!');
+            }else{
+                return redirect()->back()->with('failed','Gagal Register!');
+            }
         } catch (\Throwable $th) {
-            return redirect()->back()->with('failed','Gagal Register');
+            return redirect()->back()->with('failed','Gagal Register,Mohon hubungi Developer!');
         }
     }
 }

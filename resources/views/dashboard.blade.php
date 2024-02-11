@@ -2,18 +2,6 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-<div class="row">
-  <div class="col-lg-4">
-      <select name="" id="kegiatan-input" class="form-control">
-        @foreach ($kegiatan_all as $item)
-            <option value="{{ $item->id }}">{{ $item->kegiatan.' '.$item->tahun }}</option>
-        @endforeach
-      </select>
-  </div>
-  <div class="col-lg-3">
-    <button class="btn btn-primary" onclick="filter()">Filter</button>
-  </div>
-
 </div>
   <div class="row mt-4">
       <div class="col-lg-12 mb-lg-0 mb-4">
@@ -23,7 +11,7 @@
               <div class="col-lg-12">
                 <div class="d-flex flex-column h-100">
                   <center>
-                    <h2 class="font-weight-bolder" style="color: white">Selamat Datang di Dashboard Voting</h2>
+                    <h2 class="font-weight-bolder" style="color: white">Selamat Datang di Dashboard Sekertaris</h2>
                   </center>
                 </div>
               </div>
@@ -32,95 +20,7 @@
         </div>
       </div>
   </div>
-  <div class="row mt-4">
-      <div class="col-lg-3 mb-lg-0 mb-4">
-        <div class="card" style="background:red">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-column h-100">
-                  <center>
-                    <h2 class="font-weight-bolder" style="color: white">Data Santri</h2>
-                    <h1 class="font-weight-bolder" style="color: white">{{ $santri }}</h1>
-                  </center>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-lg-0 mb-4">
-        <div class="card" style="background:blue">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-column h-100">
-                  <center>
-                    <h2 class="font-weight-bolder" style="color: white">Data Kegiatan</h2>
-                    <h1 class="font-weight-bolder" style="color: white">{{ $kegiatan }}</h1>
-                  </center>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-lg-0 mb-4">
-        <div class="card" style="background:orange">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-column h-100">
-                  <center>
-                    <h2 class="font-weight-bolder" style="color: white">Data Kandidat</h2>
-                    <h1 class="font-weight-bolder" style="color: white">{{ $kandidat }}</h1>
-                  </center>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 mb-lg-0 mb-4">
-        <div class="card" style="background:green">
-          <div class="card-body p-3">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="d-flex flex-column h-100">
-                  <center>
-                    <h2 class="font-weight-bolder" style="color: white">Data Suara</h2>
-                    <h1 class="font-weight-bolder" style="color: white">{{ $suara }}</h1>
-                  </center>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <div id="pie"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="card">
-        <div class="card-body">
-          <div id="chartQuick"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   
-
- 
-
-
 @endsection
 @push('dashboard')
 

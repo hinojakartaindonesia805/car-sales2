@@ -13,8 +13,8 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        @if (auth()->user()->foto != null)
-                        <img src="{{ asset('assets/img/foto_user/'. auth()->user()->foto) }}" alt="..." class="w-100 border-radius-lg shadow-sm">
+                        @if ($sekertaris->foto != null)
+                        <img src="{{ asset('assets/img/foto_user/'. $sekertaris->foto) }}" alt="..." class="w-100 border-radius-lg shadow-sm">
                         @else
                         <img src="../assets/img/blank-logo.png" alt="..." class="w-100 border-radius-lg shadow-sm">
                         @endif
@@ -26,28 +26,27 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ auth()->user()->name }}
+                            {{ $sekertaris->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            {{ auth()->user()->role }}
+                            {{ $sekertaris->role }}
                         </p>
                     </div>
                 </div>
-                @if (Auth::user()->role == 'Sekertaris')
-                    <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        <div class="nav-wrapper position-relative end-0">
-                            @if ($sekertaris->vidio_diri != null)
-                            <iframe src="{{ $sekertaris->vidio_diri }}" frameborder="0"></iframe>
-                            @else
-                            <span>Sekertaris Tidak memiliki Vidio diri!</span>
-                            @endif
-                        </div>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <div class="nav-wrapper position-relative end-0">
+                        @if ($sekertaris->vidio_diri != null)
+                        <iframe src="{{ $sekertaris->vidio_diri }}" frameborder="0"></iframe>
+                        @else
+                        <span>Sekertaris tersebut Tidak memiliki Vidio diri!</span>
+                        @endif
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid py-4">
+
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <h6 class="mb-0">{{ __('Profile Information') }}</h6>
@@ -79,8 +78,8 @@
                                 <label for="user-name" class="form-control-label">{{ __('Foto Profile') }}</label>
                                 <div class="@error('user.name')border border-danger rounded-3 @enderror">
 
-                                    <input name="foto" type="file" class="dropify" data-height="200" data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"    
-                                    data-default-file="{{ asset('assets/img/foto_user/'.auth()->user()->foto) }}" value="{{auth()->user()->foto}}" />
+                                    <input name="foto" type="file" class="dropify" data-height="200" readonly disabled data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"    
+                                    data-default-file="{{ asset('assets/img/foto_user/'.$sekertaris->foto) }}" value="{{$sekertaris->foto}}" />
                                         @error('foto')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -91,8 +90,8 @@
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">{{ __('Full Name') }}</label>
                                 <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="user-name" name="name">
-                                        @error('name')
+                                    <input class="form-control" value="{{ $sekertaris->name }}" type="text" placeholder="Name" id="user-name" name="name" readonly>
+                                        @error('name') 
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
                                 </div>
@@ -102,7 +101,7 @@
                             <div class="form-group">
                                 <label for="user-email" class="form-control-label">{{ __('Email') }}</label>
                                 <div class="@error('email')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->email }}" type="email" placeholder="@example.com" id="user-email" name="email">
+                                    <input class="form-control" value="{{ $sekertaris->email }}" type="email" placeholder="@example.com" id="user-email" name="email" readonly>
                                         @error('email')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -111,7 +110,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        @if (auth()->user()->role == 'Agensi' || auth()->user()->role == 'Sekertaris' || auth()->user()->role == 'Customer')
+                        @if ($sekertaris->role == 'Agensi' || $sekertaris->role == 'Sekertaris' || $sekertaris->role == 'Customer')
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Bisnis Tipe') }}</label>
@@ -140,9 +139,9 @@
                                     );
                                 @endphp  
                                 <div class="@error('bisnis_tipe')border border-danger rounded-3 @enderror">
-                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required>
+                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required readonly>
                                             @foreach ($tipe_bisnis as $tb)
-                                                <option value="{{ $tb }}" {{ $tb == auth()->user()->bisnis_tipe ? 'selected' : '' }}>{{ $tb }}</option>
+                                                <option value="{{ $tb }}" {{ $tb == $sekertaris->bisnis_tipe ? 'selected' : '' }}>{{ $tb }}</option>
                                             @endforeach
                                         </select>
                                         @error('bisnis_tipe')
@@ -156,9 +155,9 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Jenis Kelamin') }}</label>
                                 <div class="@error('Jenis_Kelamin')border border-danger rounded-3 @enderror">
-                                        <select name="jenis_kelamin" class="form-control" id="" required>
-                                            <option value="Laki-Laki" {{ auth()->user()->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                                            <option value="Perempuan" {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                        <select name="jenis_kelamin" class="form-control" id="" required readonly>
+                                            <option value="Laki-Laki" {{ $sekertaris->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                                            <option value="Perempuan" {{ $sekertaris->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                         </select>
                                         @error('jenis_kelamin')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -167,37 +166,34 @@
                             </div>
                         </div>
 
-                        @if (auth()->user()->role == 'Sekertaris' || auth()->user()->role == 'Customer')
-
-                        @if (auth()->user()->role == 'Sekertaris')
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user.phone" class="form-control-label">Vidio Diri (Link Youtube)</label>
-                                <div class="@error('vidio_diri')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->vidio_diri }}" type="text" placeholder="Link Embed Youtube" id="user-email" name="vidio_diri">
-                                    @error('vidio_diri')
-                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                    @enderror
+                        @if ($sekertaris->role == 'Sekertaris' || $sekertaris->role == 'Customer')
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="user.phone" class="form-control-label">Vidio Diri (Link Youtube)</label>
+                                    <div class="@error('vidio_diri')border border-danger rounded-3 @enderror" >
+                                        <input class="form-control" value="{{ $sekertaris->vidio_diri }}" readonly type="text" placeholder="Link Embed Youtube" id="user-email" name="vidio_diri">
+                                        @error('vidio_diri')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        @endif
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user.phone" class="form-control-label">Linkedin (Link)</label>
-                                <div class="@error('linkedin')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->linkedin }}" type="text" placeholder="Link Linkedin" id="user-email" name="linkedin">
-                                    @error('linkedin')
-                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                    @enderror
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="user.phone" class="form-control-label">Linkedin (Link)</label>
+                                    <div class="@error('linkedin')border border-danger rounded-3 @enderror">
+                                        <input class="form-control" value="{{ $sekertaris->linkedin }}" readonly type="text" placeholder="Link Linkedin" id="user-email" name="linkedin">
+                                        @error('linkedin')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Tentang Diri') }}</label>
                                 <div class="@error('tentang_diri')border border-danger rounded-3 @enderror">
-                                        <textarea class="form-control" name="tentang_diri">{{ auth()->user()->tentang_diri }}</textarea>
+                                        <textarea class="form-control" readonly name="tentang_diri">{{ $sekertaris->tentang_diri }}</textarea>
                                         @error('tentang_diri')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -207,10 +203,6 @@
                         @endif
 
                         
-                    </div>
-                  
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
                     </div>
                 </form>
             </div>
@@ -262,7 +254,6 @@
             </div>
         </div>
         @endif
-
      
     </div>
 </div>

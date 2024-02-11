@@ -24,7 +24,7 @@ class SessionsController extends Controller
         if(Auth::attempt($attributes))
         {
             session()->regenerate();
-            if (Auth::user()->role == 'Santri') {
+            if (Auth::user()->role == 'Sekertaris' ||  Auth::user()->role == 'Customer') {
                 return redirect('/')->with(['success'=>'You are logged in.']);
             }else{
                 return redirect('dashboard')->with(['success'=>'You are logged in.']);
