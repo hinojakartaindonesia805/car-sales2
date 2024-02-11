@@ -251,7 +251,7 @@
           font-weight: 700;
           text-align: left;
         }
-        .alert-danger{
+        .alert-primary{
           background: #d20a0a;
           width: 100%;
           height: auto;
@@ -300,7 +300,6 @@
             <form action="{{ url('register') }}" method="POST" enctype="multipart/form-data">
               @csrf
                 <h1>Create Account</h1>
-                <span>or use your email for registeration</span>
 
                 @if($errors->any())
                     <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
@@ -347,7 +346,6 @@
             <form method="POST" action="/login-post">
               @csrf
                 <h1>Sign In</h1>
-                <span>or use your email password</span>
                 @if($errors->any())
                     <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
                         <span class="alert-text text-white">

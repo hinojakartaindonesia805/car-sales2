@@ -92,7 +92,7 @@ class AgensiController extends Controller
 
     public function cekReferal(Request $request){
         try {
-            $cek = User::where('referal_base',$request->referal_base)->first();
+            $cek = User::where('role','Agensi')->where('referal_base',$request->referal_base)->first();
             return response()->json([
                 'msg' => 'berhasil',
                 'data' => $cek ?? '',

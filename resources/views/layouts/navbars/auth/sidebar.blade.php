@@ -43,17 +43,8 @@
       </li>
       @if (Auth::user()->role == 'Superadmin')
       <li class="nav-item mt-2">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data</h6>
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data Admin</h6>
       </li>
-      <li class="nav-item pb-2">
-        <a class="nav-link {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('sekertaris-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sekertaris</span>
-        </a>
-      </li>
-
         <li class="nav-item mt-2">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Akun</h6>
         </li>
@@ -76,6 +67,24 @@
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('agensi-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
               <span class="nav-link-text ms-1">Agensi</span>
+          </a>
+        </li>
+
+        <li class="nav-item pb-2">
+          <a class="nav-link {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('sekertaris-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sekertaris</span>
+          </a>
+        </li>
+
+        <li class="nav-item pb-2">
+          <a class="nav-link {{ (Request::is('customer-list') ? 'active' : '') }}" href="{{ url('customer-list') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('customer-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+              </div>
+              <span class="nav-link-text ms-1">Customer</span>
           </a>
         </li>
         @elseif (Auth::user()->role == 'Agensi' || Auth::user()->role == 'Admin')

@@ -36,8 +36,8 @@
                 @if (Auth::user()->role == 'Sekertaris')
                     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
-                            @if ($sekertaris->vidio_diri != null)
-                            <iframe src="{{ $sekertaris->vidio_diri }}" frameborder="0"></iframe>
+                            @if (Auth::user()->vidio_diri != null)
+                            <iframe src="{{ Auth::user()->vidio_diri }}" frameborder="0"></iframe>
                             @else
                             <span>Sekertaris Tidak memiliki Vidio diri!</span>
                             @endif
@@ -68,6 +68,15 @@
                         <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
                             <span class="alert-text text-white">
                             {{ session('success') }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('failed'))
+                        <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
+                            <span class="alert-text text-white">
+                            {{ session('failed') }}</span>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 <i class="fa fa-close" aria-hidden="true"></i>
                             </button>
@@ -216,7 +225,16 @@
             </div>
         </div>
         @if (Auth::user()->role == 'Agensi' || Auth::user()->role == 'Sekertaris' )
-        <div class="card mt-3">
+        @if(session('need_referal'))
+            <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
+                <span class="alert-text text-white">
+                {{ session('need_referal') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </button>
+            </div>
+        @endif
+        <div class="card mt-3" id="referal">
             <div class="card-header pb-0 px-3">
                 <h6 class="mb-0">{{ __('Referal Base') }}</h6>
             </div>
@@ -253,7 +271,7 @@
                     </div>
                     @if ($val == null)
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
+                        <button type="submit" class="btn btn-update-ref bg-gradient-dark btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
                     </div>
                     @endif
                   

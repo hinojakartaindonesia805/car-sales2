@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgensiController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\KandidatController;
@@ -44,7 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::get('/sekertaris-list', [SekertarisController::class, 'index'])->name('sekertaris-list');
 	Route::get('/sekertaris-detail/{id}', [SekertarisController::class, 'detail'])->name('sekertaris-detail');
-
+	
+	Route::get('/customer-list', [CustomerController::class, 'index'])->name('customer-list');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-management', [InfoUserController::class, 'userManagement'])->name('user-management');

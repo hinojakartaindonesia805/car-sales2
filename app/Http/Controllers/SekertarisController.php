@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SekertarisController extends Controller
 {
@@ -14,7 +15,7 @@ class SekertarisController extends Controller
             if (Auth::user()->referal_base != null) {
                 $data['user'] = User::where('role','Sekertaris')->where('referal_code',Auth::user()->referal_base)->orderBy('id','desc')->get();
             }else{
-                return redirect()->url('user-profile')->with('failed','Mohon Generate Code Referal anda terlebih dahulu pada halaman profile!');
+                return Redirect('user-profile#referal')->with('need_referal','Mohon Generate Code Referal anda terlebih dahulu!');
             }
         }else{
             $data['user'] = User::where('role','Sekertaris')->orderBy('id','desc')->get();

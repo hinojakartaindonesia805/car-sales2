@@ -136,10 +136,10 @@
                                         ID
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Name
+                                        Foto
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Foto
+                                        Nama Agensi
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tipe Bisnis
@@ -157,19 +157,21 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
+                                {{-- {{dd($user)}} --}}
                                 <tr>
                                         
                                     <td class="ps-4">
                                         <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
                                     </td>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
-                                    </td>
+                                   
                                     <td class="text-center">
                                         <img style="max-width: 100px" src="{{ asset('assets/img/foto_user/'.$item->foto) }}" alt="">
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $item->bisnis_tipe }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->bisnis_tipe ?? '1' }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->email }}</p>
