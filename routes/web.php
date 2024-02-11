@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sekertaris-detail/{id}', [SekertarisController::class, 'detail'])->name('sekertaris-detail');
 	
 	Route::get('/customer-list', [CustomerController::class, 'index'])->name('customer-list');
+	Route::get('/customer-detail/{id}', [CustomerController::class, 'detail'])->name('customer-detail');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-management', [InfoUserController::class, 'userManagement'])->name('user-management');

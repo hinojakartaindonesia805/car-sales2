@@ -6,6 +6,10 @@
 .navbar-vertical .navbar-nav .nav-link{
   color: white
 }
+.nav-link2{
+  background: #0c2a72;
+  border-radius: 10px;
+}
 </style>
 <aside style="background-image:linear-gradient(310deg,aqua,blue)" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
   <div class="sidenav-header">
@@ -22,7 +26,7 @@
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Menu</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
+        <a class="nav-link nav-link2 {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -49,7 +53,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Akun</h6>
         </li>
         <li class="nav-item pb-2">
-          <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
@@ -62,7 +66,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data</h6>
         </li>
         <li class="nav-item pb-2">
-          <a class="nav-link {{ (Request::is('agensi-management') ? 'active' : '') }}" href="{{ url('agensi-management') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('agensi-management') ? 'active' : '') }}" href="{{ url('agensi-management') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('agensi-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
@@ -71,7 +75,7 @@
         </li>
 
         <li class="nav-item pb-2">
-          <a class="nav-link {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('sekertaris-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
@@ -80,7 +84,7 @@
         </li>
 
         <li class="nav-item pb-2">
-          <a class="nav-link {{ (Request::is('customer-list') ? 'active' : '') }}" href="{{ url('customer-list') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('customer-list') ? 'active' : '') }}" href="{{ url('customer-list') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('customer-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
@@ -92,7 +96,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data</h6>
         </li>
         <li class="nav-item pb-2">
-          <a class="nav-link {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('sekertaris-list') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
               </div>
@@ -102,7 +106,7 @@
         @endif
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">
+          <a class="nav-link nav-link2 {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
