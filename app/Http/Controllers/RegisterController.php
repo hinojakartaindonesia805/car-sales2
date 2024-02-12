@@ -32,6 +32,10 @@ class RegisterController extends Controller
             $new->name = $request->name;
             $new->role = $request->role;
             $new->no_wa = $request->no_wa;
+            $cekMail = User::where('email',$request->email)->first();
+            if ($cekMail != null) {
+                return redirect()->back()->with('failed','Email sudah dipakai!');
+            }
             $new->email = $request->email;
             $new->status = 1;
             $new->referal_code = $request->referal_code;
