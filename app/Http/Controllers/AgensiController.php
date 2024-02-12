@@ -30,6 +30,10 @@ class AgensiController extends Controller
                 $new->foto = $name;
             }
             $new->bisnis_tipe = $request->tipe_bisnis;
+            $cekMail = User::where('email',$request->email)->first();
+            if ($cekMail != null) {
+                return redirect()->back()->with('failed','Email sudah dipakai!');
+            }
             $new->email = $request->email;
             $new->password = bcrypt($request->password);
             $new->status = $request->status;
@@ -66,6 +70,11 @@ class AgensiController extends Controller
                 $new->foto = $name;
             }
             $new->bisnis_tipe = $request->tipe_bisnis;
+            $cekMail = User::where('id','!=',$id)->where('email',$request->email)->first();
+            // dd($cekMail);
+            if ($cekMail != null) {
+                return redirect()->back()->with('failed','Email sudah dipakai!');
+            }
             $new->email = $request->email;
             if ($new->status != $request->status) {
                 if ($request->status == 1) {
