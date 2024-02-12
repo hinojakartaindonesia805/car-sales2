@@ -35,7 +35,7 @@ class SessionsController extends Controller
         }
         else{
 
-            return back()->withErrors(['email'=>'Emcail atau password Salah.']);
+            return back()->withErrors(['email'=>'Email atau password Salah.']);
         }
     }
     
