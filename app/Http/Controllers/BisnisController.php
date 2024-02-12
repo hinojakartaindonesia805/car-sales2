@@ -106,7 +106,7 @@ class BisnisController extends Controller
             $log->id_user =  Auth::user()->id;
             $log->event = Auth::user()->name. ' Mengahpus Tipe Bisnis : '.$new->tipe_bisnis;
             $log->save();
-            if ($new->save()) {
+            if ($new->delete()) {
                 return redirect()->back()->with('success','Data Tipe Bisnis Berhasil Dihapus!');
             }else{
                 return redirect()->back()->with('failed','Data Tipe Bisnis Gagal Dihapus!');
