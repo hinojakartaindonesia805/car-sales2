@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Foto</label> 
-                                            <input name="foto" type="file" class="dropify" required data-height="200" data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"     />
+                                            <input name="foto" type="file" class="dropify" data-height="200" data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"     />
                                         @error('foto')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror

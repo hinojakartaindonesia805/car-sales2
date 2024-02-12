@@ -394,7 +394,7 @@
                     {{-- <input type="number" name="age" placeholder="Usia" required /> --}}
                   <input type="password" name="password" placeholder="Password" required/>
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required/>
-                  <input type="text" name="referal_code" placeholder="Referal Code" required/>
+                  <input type="text" name="referal_code" placeholder="Referal Code"/>
                   <button type="submit">Sign Up</button>
               </form>
         </div>
