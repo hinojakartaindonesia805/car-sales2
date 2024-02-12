@@ -198,7 +198,7 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">Tanggal Lahir</label>
                                 <div class="@error('no_wa')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->no_wa }}" type="date" placeholder="No WhatsApp" id="user-email" name="no_wa">
+                                    <input class="form-control" value="{{ auth()->user()->tanggal_lahir }}" type="date" placeholder="No WhatsApp" id="user-email" name="tanggal_lahir">
                                     @error('no_wa')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
