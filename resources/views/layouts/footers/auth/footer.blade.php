@@ -13,7 +13,7 @@
                 <div class="copyright text-center text-sm text-muted text-lg-start mb-2">
                     © <script>
                         document.write(new Date().getFullYear())
-                    </script>, made with <i class="fa fa-heart"></i> by JDEVA Production
+                    </script>, made with <i class="fa fa-heart"></i> by PT. Segitiga Bangun Semesta
                   
                 </div>
             </div>

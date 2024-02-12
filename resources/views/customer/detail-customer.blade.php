@@ -106,33 +106,13 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Bisnis Tipe') }}</label>
                                 @php
-                                    $tipe_bisnis = array(
-                                        "Perdagangan eceran",
-                                        "Jasa konsultasi",
-                                        "Manufaktur",
-                                        "Teknologi informasi dan layanan terkait",
-                                        "Restoran dan layanan makanan",
-                                        "Jasa kecantikan dan perawatan pribadi",
-                                        "Perdagangan grosir",
-                                        "Perbankan dan keuangan",
-                                        "Pendidikan dan pelatihan",
-                                        "Hiburan dan rekreasi",
-                                        "Konstruksi dan pembangunan",
-                                        "Transportasi dan logistik",
-                                        "Penerbitan dan media",
-                                        "Pertanian dan peternakan",
-                                        "Kesehatan dan layanan medis",
-                                        "Real estat dan properti",
-                                        "Otomotif dan perbaikan kendaraan",
-                                        "Lingkungan dan energi terbarukan",
-                                        "Layanan hukum dan konsultasi hukum",
-                                        "Layanan pembersihan dan perawatan rumah tangga"
-                                    );
+                                    $tipe_bisnis = App\Models\Bisnis::get();
                                 @endphp  
                                 <div class="@error('bisnis_tipe')border border-danger rounded-3 @enderror">
-                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required readonly>
+                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required>
+                                            <option value="">Pilih Bisnis Tipe</option>
                                             @foreach ($tipe_bisnis as $tb)
-                                                <option value="{{ $tb }}" {{ $tb == $customer->bisnis_tipe ? 'selected' : '' }}>{{ $tb }}</option>
+                                                <option value="{{ $tb->id }}" {{ $tb->id == $customer->bisnis_tipe ? 'selected' : '' }}>{{ $tb->tipe_bisnis }}</option>
                                             @endforeach
                                         </select>
                                         @error('bisnis_tipe')

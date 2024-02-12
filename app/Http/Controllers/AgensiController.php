@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogAction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AgensiController extends Controller
 {
@@ -30,14 +32,23 @@ class AgensiController extends Controller
             $new->bisnis_tipe = $request->tipe_bisnis;
             $new->email = $request->email;
             $new->password = bcrypt($request->password);
+            $new->status = $request->status;
+            $new->reason_non_aktif = $request->reason_non_aktif;
     
             if ($new->save()) {
+
+                $log = new LogAction();
+                $log->id_user =  Auth::user()->id;
+                $log->event = Auth::user()->name. ' Membuat Agensi Baru : '.$new->email;
+                $log->save();
+
                 return redirect()->back()->with('success','Data Agensi Berhasil Dibuat!');
             }else{
                 return redirect()->back()->with('failed','Data Agensi Gagal Dibuat!');
             }
         } catch (\Throwable $th) {
-            return redirect()->back()->with('failed','Terjadi Problem,mohon hubungi Developer!');
+            // return redirect()->back()->with('failed','Terjadi Problem,mohon hubungi Developer!');
+            return redirect()->back()->with('failed',$th->getMessage());
         }
 
     }
@@ -56,11 +67,32 @@ class AgensiController extends Controller
             }
             $new->bisnis_tipe = $request->tipe_bisnis;
             $new->email = $request->email;
+            if ($new->status != $request->status) {
+                if ($request->status == 1) {
+                    $log = new LogAction();
+                    $log->id_user =  Auth::user()->id;
+                    $log->event = Auth::user()->name. ' Mengaktifkan Agensi : '.$new->email;
+                    $log->save();
+                }else{
+                    $new->reason_non_aktif = $request->reason_non_aktif;
+                    $log = new LogAction();
+                    $log->id_user =  Auth::user()->id;
+                    $log->event = Auth::user()->name. ' Menonaktifkan Agensi : '.$new->email. ', Catatan : ' .$new->reason_non_aktif;
+                    $log->save();
+                }
+            }
+            $new->status = $request->status;
             if ($request->password != null) {
                 $new->password = bcrypt($request->password);
             }
     
             if ($new->save()) {
+
+                $log = new LogAction();
+                $log->id_user =  Auth::user()->id;
+                $log->event = Auth::user()->name. ' Mengedit Agensi : '.$new->email;
+                $log->save();
+
                 return redirect()->back()->with('success','Data Agensi Berhasil Diedit!');
             }else{
                 return redirect()->back()->with('failed','Data Agensi Gagal Diedit!');
@@ -80,6 +112,8 @@ class AgensiController extends Controller
                 $new->referal_code = $request->code_referal;
             }
             if ($new->save()) {
+
+
                 return redirect()->back()->with('success','Code Referal Berhasil disimpan!');
             }else{
                 return redirect()->back()->with('failed','Code Referal Gagal disimpan!');
@@ -89,7 +123,7 @@ class AgensiController extends Controller
         }
 
     }
-
+ 
     public function cekReferal(Request $request){
         try {
             $cek = User::where('role','Agensi')->where('referal_base',$request->referal_base)->first();
@@ -110,6 +144,11 @@ class AgensiController extends Controller
         try {
             $new = User::find($id);
            
+            $log = new LogAction();
+            $log->id_user =  Auth::user()->id;
+            $log->event = Auth::user()->name. ' Menghapus Agensi : '.$new->email;
+            $log->save();
+
             if ($new->delete()) {
                 return redirect()->back()->with('success','Data Agensi Berhasil Dihapus!');
             }else{

@@ -125,33 +125,13 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Bisnis Tipe') }}</label>
                                 @php
-                                    $tipe_bisnis = array(
-                                        "Perdagangan eceran",
-                                        "Jasa konsultasi",
-                                        "Manufaktur",
-                                        "Teknologi informasi dan layanan terkait",
-                                        "Restoran dan layanan makanan",
-                                        "Jasa kecantikan dan perawatan pribadi",
-                                        "Perdagangan grosir",
-                                        "Perbankan dan keuangan",
-                                        "Pendidikan dan pelatihan",
-                                        "Hiburan dan rekreasi",
-                                        "Konstruksi dan pembangunan",
-                                        "Transportasi dan logistik",
-                                        "Penerbitan dan media",
-                                        "Pertanian dan peternakan",
-                                        "Kesehatan dan layanan medis",
-                                        "Real estat dan properti",
-                                        "Otomotif dan perbaikan kendaraan",
-                                        "Lingkungan dan energi terbarukan",
-                                        "Layanan hukum dan konsultasi hukum",
-                                        "Layanan pembersihan dan perawatan rumah tangga"
-                                    );
+                                    $tipe_bisnis = App\Models\Bisnis::get();
                                 @endphp  
                                 <div class="@error('bisnis_tipe')border border-danger rounded-3 @enderror">
                                         <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required>
+                                            <option value="">Pilih Bisnis Tipe</option>
                                             @foreach ($tipe_bisnis as $tb)
-                                                <option value="{{ $tb }}" {{ $tb == auth()->user()->bisnis_tipe ? 'selected' : '' }}>{{ $tb }}</option>
+                                                <option value="{{ $tb->id }}" {{ $tb->id == auth()->user()->bisnis_tipe ? 'selected' : '' }}>{{ $tb->tipe_bisnis }}</option>
                                             @endforeach
                                         </select>
                                         @error('bisnis_tipe')
@@ -166,6 +146,7 @@
                                 <label for="user.phone" class="form-control-label">{{ __('Jenis Kelamin') }}</label>
                                 <div class="@error('Jenis_Kelamin')border border-danger rounded-3 @enderror">
                                         <select name="jenis_kelamin" class="form-control" id="" required>
+                                            <option value="">Pilih Jenis Kelamin</option>
                                             <option value="Laki-Laki" {{ auth()->user()->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
                                             <option value="Perempuan" {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                         </select>
@@ -197,6 +178,28 @@
                                 <div class="@error('linkedin')border border-danger rounded-3 @enderror">
                                     <input class="form-control" value="{{ auth()->user()->linkedin }}" type="text" placeholder="Link Linkedin" id="user-email" name="linkedin">
                                     @error('linkedin')
+                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user.phone" class="form-control-label">No WhatsApp</label>
+                                <div class="@error('no_wa')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" value="{{ auth()->user()->no_wa }}" type="number" placeholder="No WhatsApp" id="user-email" name="no_wa">
+                                    @error('no_wa')
+                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user.phone" class="form-control-label">Tanggal Lahir</label>
+                                <div class="@error('no_wa')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" value="{{ auth()->user()->no_wa }}" type="date" placeholder="No WhatsApp" id="user-email" name="no_wa">
+                                    @error('no_wa')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -280,6 +283,57 @@
             </div>
         </div>
         @endif
+
+        <div class="card mt-3" id="referal">
+            @if(session('success_update_pw'))
+                <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
+                    <span class="alert-text text-white">
+                    {{ session('success_update_pw') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                    </button>
+                </div>
+            @endif
+            @if(session('failed__update_pw'))
+                <div class="m-3  alert alert-danger alert-dismissible fade show" id="alert-success" role="alert">
+                    <span class="alert-text text-white">
+                    {{ session('failed__update_pw') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                    </button>
+                </div>
+            @endif
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">{{ __('Ubah Password') }}</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <form action="{{ url('password-update') }}" method="POST" role="form text-left" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user-name" class="form-control-label">{{ __('Password Lama') }}</label>
+                                <div class="@error('password')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" name="password"  type="text" placeholder="Masukan Password Lama" id="referal" value="" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user-name" class="form-control-label">{{ __('Password Baru') }}</label>
+                                <div class="@error('password')border border-danger rounded-3 @enderror">
+                                    <input class="form-control" name="new_password"  type="text" placeholder="Masukan Password Baru" id="referal" value="" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-update-ref bg-gradient-dark btn-md mt-4 mb-4">{{ 'Ubah' }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
 
      
     </div>

@@ -24,7 +24,10 @@ class SessionsController extends Controller
         if(Auth::attempt($attributes))
         {
             session()->regenerate();
-            if (Auth::user()->role == 'Sekertaris' ||  Auth::user()->role == 'Customer') {
+            if (Auth::user()->status == 2) {
+                return back()->withErrors(['failed'=>'Akun anda di Non Aktifkan oleh admin! Hubungi admin untuk informasi lebih lanjut.']);
+            }
+            if (Auth::user()->role == 'Sekertaris' ||  Auth::user()->role == 'Customer' ) {
                 return redirect('/')->with(['success'=>'You are logged in.']);
             }else{
                 return redirect('dashboard')->with(['success'=>'You are logged in.']);
@@ -32,7 +35,7 @@ class SessionsController extends Controller
         }
         else{
 
-            return back()->withErrors(['email'=>'Email atau password Salah.']);
+            return back()->withErrors(['email'=>'Emcail atau password Salah.']);
         }
     }
     

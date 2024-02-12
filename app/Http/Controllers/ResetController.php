@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\View;
 
@@ -12,6 +15,25 @@ class ResetController extends Controller
     {
         return view('session/reset-password/sendEmail');
         
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validateData = $request->validate([
+            'password' => 'required',
+            'new_password' => 'required|min:8',
+        ]);
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        if (Hash::check($validateData['password'], $user->password)) {
+            $user->password = Hash::make($request->get('new_password'));
+            $user->save();
+
+            return redirect()->back()->with('success_update_pw', 'Password Berhasil diubah!');
+        } else {
+            return redirect()->back()->with('failed__update_pw', 'Password Gagal diubah!');
+        }
     }
 
     public function sendEmail(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogAction;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -13,6 +14,14 @@ class RegisterController extends Controller
     {
         return view('session.register');
     }
+    public function registerSekertaris()
+    {
+        return view('session.register-sekertaris');
+    }
+    public function registerCustomer()
+    {
+        return view('session.register-customer');
+    }
 
     public function store(Request $request)
     {
@@ -22,19 +31,28 @@ class RegisterController extends Controller
             $new = new User();
             $new->name = $request->name;
             $new->role = $request->role;
-            $new->bisnis_tipe = $request->tipe_bisnis;
-            $new->jenis_kelamin = $request->jenis_kelamin;
-            $new->age = $request->age;
+            $new->no_wa = $request->no_wa;
             $new->email = $request->email;
+            $new->status = 1;
             $new->referal_code = $request->referal_code;
+            if ($request->password != $request->confirm_password) {
+                return redirect()->back()->with('failed','Confirm Password not match!');
+            }
             $new->password = bcrypt($request->password);
     
             if ($new->save()) {
+
+                $log = new LogAction();
+                $log->id_user =  $new->id;
+                $log->event = $new->email. 'Telah Mendaftar sebagai '. $new->role;
+                $log->save();
+        
                 return redirect()->back()->with('success','Berhasil Register!');
             }else{
                 return redirect()->back()->with('failed','Gagal Register!');
             }
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return redirect()->back()->with('failed','Gagal Register,Mohon hubungi Developer!');
         }
     }

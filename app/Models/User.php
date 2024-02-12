@@ -31,6 +31,9 @@ class User extends Authenticatable
         'linkedin',
         'vidio_diri',
         'tentang_diri',
+        'status',
+        'reason_non_aktif',
+        'no_wa',
     ];
 
     /**

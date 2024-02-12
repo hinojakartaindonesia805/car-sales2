@@ -115,33 +115,13 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">{{ __('Bisnis Tipe') }}</label>
                                 @php
-                                    $tipe_bisnis = array(
-                                        "Perdagangan eceran",
-                                        "Jasa konsultasi",
-                                        "Manufaktur",
-                                        "Teknologi informasi dan layanan terkait",
-                                        "Restoran dan layanan makanan",
-                                        "Jasa kecantikan dan perawatan pribadi",
-                                        "Perdagangan grosir",
-                                        "Perbankan dan keuangan",
-                                        "Pendidikan dan pelatihan",
-                                        "Hiburan dan rekreasi",
-                                        "Konstruksi dan pembangunan",
-                                        "Transportasi dan logistik",
-                                        "Penerbitan dan media",
-                                        "Pertanian dan peternakan",
-                                        "Kesehatan dan layanan medis",
-                                        "Real estat dan properti",
-                                        "Otomotif dan perbaikan kendaraan",
-                                        "Lingkungan dan energi terbarukan",
-                                        "Layanan hukum dan konsultasi hukum",
-                                        "Layanan pembersihan dan perawatan rumah tangga"
-                                    );
+                                    $tipe_bisnis = App\Models\Bisnis::get();
                                 @endphp  
                                 <div class="@error('bisnis_tipe')border border-danger rounded-3 @enderror">
-                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required readonly>
+                                        <select id="tipe_bisnis" class="form-control" name="bisnis_tipe" required>
+                                            <option value="">Pilih Bisnis Tipe</option>
                                             @foreach ($tipe_bisnis as $tb)
-                                                <option value="{{ $tb }}" {{ $tb == $sekertaris->bisnis_tipe ? 'selected' : '' }}>{{ $tb }}</option>
+                                                <option value="{{ $tb->id }}" {{ $tb->id == $sekertaris->bisnis_tipe ? 'selected' : '' }}>{{ $tb->tipe_bisnis }}</option>
                                             @endforeach
                                         </select>
                                         @error('bisnis_tipe')
@@ -184,6 +164,28 @@
                                     <div class="@error('linkedin')border border-danger rounded-3 @enderror">
                                         <input class="form-control" value="{{ $sekertaris->linkedin }}" readonly type="text" placeholder="Link Linkedin" id="user-email" name="linkedin">
                                         @error('linkedin')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="user.phone" class="form-control-label">No WhatsApp</label>
+                                    <div class="@error('no_wa')border border-danger rounded-3 @enderror">
+                                        <input class="form-control" value="{{ auth()->user()->no_wa }}" readonly type="number" placeholder="No WhatsApp" id="user-email" name="no_wa">
+                                        @error('no_wa')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="user.phone" class="form-control-label">Tanggal Lahir</label>
+                                    <div class="@error('no_wa')border border-danger rounded-3 @enderror">
+                                        <input class="form-control" value="{{ auth()->user()->no_wa }}" readonly type="date" placeholder="No WhatsApp" id="user-email" name="no_wa">
+                                        @error('no_wa')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
                                     </div>

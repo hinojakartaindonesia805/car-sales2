@@ -12,7 +12,7 @@
         <ul>
           <li><a href="{{ route('home') }}">Home</a></li>
           @if (Auth::check())
-          <li><a class="get-a-quote" href="{{ url('dashboard') }}" style="background: none;border: 1px solid blue;border-radius: 15px;">Profile</a></li>
+          <li><a class="get-a-quote" href="{{ url('dashboard') }}" style="background: none;border: 1px solid blue;border-radius: 15px;">Dashboard</a></li>
           <li><a class="get-a-quote bg-danger" href="{{ url('/logout')}}" style="background: none!important;border: 1px solid red;border-radius: 15px;">Logout</a></li>
           @else
           <li><a class="get-a-quote" href="{{ url('login') }}" style="background: none;border: 1px solid blue;border-radius: 15px;">Login</a></li>

@@ -32,6 +32,20 @@
             </button>
         </div>
     @endif
+    <form action="" method="get">
+    <div class="row">
+            <div class="col-lg-4">
+                <select name="status" class="form-control" id="" required>
+                    <option value="All" >Semua Status</option>
+                    <option value="1" >Aktif</option>
+                    <option value="2" >Tidak Aktif</option>
+                </select>
+            </div>
+            <div class="col-lg-4">
+            <button class="btn btn-primary" type="submit">Filter</button>
+            </div>
+        </div>
+    </form>
     <div class="row">
         <div class="col-12">
             <div class="card mb-4 mx-4">
@@ -72,8 +86,27 @@
                                             @enderror
                                         </div>
                                         <div class="mb-3">
+                                            <label for="">Status</label>
+                                            <select name="status" class="form-control" id="" required>
+                                                <option value="1" >Aktif</option>
+                                                <option value="2" >Tidak Aktif</option>
+                                            </select>
+                                            @error('jenis_kelamin')
+                                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3 keterangan-div-create" >
+                                            <label for="">Keterangan</label> 
+                                            <textarea name="reason_non_aktif" class="form-control" id="" cols="30" rows="10"></textarea>
+                                        @error('reason_non_aktif')
+                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                        </div>
+
+                                        <div class="mb-3">
                                             <label for="">Foto</label> 
-                                            <input name="foto" type="file" class="dropify" required data-height="200" data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"     />
+                                            <input name="foto" type="file" class="dropify" data-height="200" data-max-file-size="500K" data-allowed-file-extensions="jpg png jpeg"     />
                                         @error('foto')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -126,14 +159,17 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Email
                                     </th>
-                                    {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Jenis Kelamin
-                                    </th> --}}
+                                    </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         role
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Creation Date
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Aktif/Tidak Aktif
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action
@@ -151,15 +187,19 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
                                     </td>
                                     <td class="text-center">
+                                        @if ($item->foto != null)
                                         <img style="max-width: 100px" src="{{ asset('assets/img/foto_user/'.$item->foto) }}" alt="">
+                                        @else
+                                        <img style="max-width: 100px" src="../assets/img/blank-logo.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+                                        @endif
                                     </td>
                                    
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->email }}</p>
                                     </td>
-                                    {{-- <td class="text-center">
+                                    <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_kelamin }}</p>
-                                    </td> --}}
+                                    </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->role }}</p>
                                     </td>
@@ -167,7 +207,17 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at->format('d/m/Y') }}</span>
                                     </td>
                                     <td class="text-center">
-                                    <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#modaledit{{ $item->id }}">
+                                        @if ($item->status == 2)
+                                             <span class="badge bg-danger" data-bs-toggle="tooltip">Tidak Aktif</span>
+                                             <a href="#" type="button" title="Klik untuk lihat reason!" data-bs-toggle="modal" data-bs-target="#reason{{ $item->id }}">
+                                                <i class="fas fa-edit	text-secondary"></i>
+                                            </a>
+                                        @else
+                                             <span class="badge bg-success">Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                    <a href="#" type="button" onclick="editStatus('{{$item->status}}')" data-bs-toggle="modal" data-bs-target="#modaledit{{ $item->id }}">
                                         <i class="fas fa-user-edit text-secondary"></i>
                                     </a>
                                     <a href="{{ route('delete-user',$item->id) }}" type="button" >
@@ -233,6 +283,25 @@
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="">Status</label>
+                    <select name="status" class="form-control" id="" required>
+                        <option value="1" {{ $item2->status == '1' ? 'selected' : '' }}>Aktif</option>
+                        <option value="2" {{ $item2->status == '2' ? 'selected' : '' }}>Tidak Aktif</option>
+                    </select>
+                    @error('jenis_kelamin')
+                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3 keterangan-div" >
+                    <label for="">Keterangan</label> 
+                    <textarea name="reason_non_aktif" class="form-control" id="" cols="30" rows="10">{{ $item2->reason_non_aktif  }}</textarea>
+                @error('reason_non_aktif')
+                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                @enderror
+                </div>
+
                 <input type="hidden" value="Admin" name="role">
 
                 <div class="mb-3">
@@ -254,6 +323,24 @@
     </div>
     </div>
 </div>
+<div class="modal fade" id="reason{{ $item2->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Keterangan Tidak Aktif</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            @csrf
+        <div class="modal-body">
+             {{ $item2->reason_non_aktif ?? 'Tidak ada keterangan' }}
+        </div>
+        
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
 @endforeach
 
 
@@ -265,9 +352,43 @@
 <script>
 $('.dropify').dropify();
 
+function editStatus(id){
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+    // Sembunyikan div saat halaman dimuat
+    if (id == 2) {
+        $('.keterangan-div').show();
+    }else{
+        $('.keterangan-div').hide();
+    }
+
+    // Tambahkan event listener untuk memantau perubahan pada dropdown
+    if ($(this).val() === '2') {
+        $('.keterangan-div').show();
+    } else {
+        $('.keterangan-div').hide();
+    }
+}
+
     $(document).ready(function () {
         $('#myDataTable').DataTable();
+        $('.keterangan-div-create').hide();
+        // Tambahkan event listener untuk memantau perubahan pada dropdown
+        $('select[name="status"]').change(function() {
+            console.log($(this).val());
+            if ($(this).val() === '2') {
+                $('.keterangan-div').show();
+                $('.keterangan-div-create').show();
+            } else {
+                $('.keterangan-div').hide();
+                $('.keterangan-div-create').hide();
+            }
+        });
+
     });
+
+    
 </script>
 
 @endsection

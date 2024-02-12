@@ -15,7 +15,7 @@
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
-        {{-- <img src="{{asset('assets/img/logo-kopi.png')}}" class="navbar-brand-img h-100" alt="..."> --}}
+        <img src="{{asset('assets/img/logo-pt.jpeg')}}" class="navbar-brand-img h-100" alt="...">
         <span class="ms-3 font-weight-bold" style="color: white">Dashboard</span>
     </a>
   </div>
@@ -25,7 +25,7 @@
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Menu</h6>
       </li>
-      <li class="nav-item">
+      <li class="nav-item pb-2">
         <a class="nav-link nav-link2 {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,12 +46,7 @@
         </a>
       </li>
       @if (Auth::user()->role == 'Superadmin')
-      <li class="nav-item mt-2">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data Admin</h6>
-      </li>
-        <li class="nav-item mt-2">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Akun</h6>
-        </li>
+    
         <li class="nav-item pb-2">
           <a class="nav-link nav-link2 {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -60,11 +55,16 @@
               <span class="nav-link-text ms-1">Admin</span>
           </a>
         </li>
+        <li class="nav-item pb-2">
+          <a class="nav-link nav-link2 {{ (Request::is('log-action') ? 'active' : '') }}" href="{{ url('log-action') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('log-action') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+              </div>
+              <span class="nav-link-text ms-1">Log Action</span>
+          </a>
+        </li>
         
         @elseif (Auth::user()->role == 'Admin')
-        <li class="nav-item mt-2">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data</h6>
-        </li>
         <li class="nav-item pb-2">
           <a class="nav-link nav-link2 {{ (Request::is('agensi-management') ? 'active' : '') }}" href="{{ url('agensi-management') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -91,10 +91,15 @@
               <span class="nav-link-text ms-1">Customer</span>
           </a>
         </li>
-        @elseif (Auth::user()->role == 'Agensi' || Auth::user()->role == 'Admin')
-        <li class="nav-item mt-2">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color: white">Kelola Data</h6>
+        <li class="nav-item pb-2">
+          <a class="nav-link nav-link2 {{ (Request::is('bisnis-management') ? 'active' : '') }}" href="{{ url('bisnis-management') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('bisnis-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+              </div>
+              <span class="nav-link-text ms-1">Manage Tipe Bisnis</span>
+          </a>
         </li>
+        @elseif (Auth::user()->role == 'Agensi' || Auth::user()->role == 'Admin')
         <li class="nav-item pb-2">
           <a class="nav-link nav-link2 {{ (Request::is('sekertaris-list') ? 'active' : '') }}" href="{{ url('sekertaris-list') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
