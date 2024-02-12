@@ -78,9 +78,11 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Aktif/Tidak Aktif
                                     </th>
+                                    @if (Auth::user()->role == 'Admin')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action
                                     </th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,11 +137,13 @@
                                              <span class="badge bg-success">Aktif</span>
                                         @endif
                                     </td>
+                                    @if (Auth::user()->role == 'Admin')
                                     <td class="text-center">
                                         <a href="#" type="button" onclick="editStatus('{{$item->status}}')"  data-bs-toggle="modal" data-bs-target="#modaledit{{ $item->id }}">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
