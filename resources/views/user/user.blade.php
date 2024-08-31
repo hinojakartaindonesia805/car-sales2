@@ -140,7 +140,7 @@
                                     @if (Auth::user()->role == 'Admin')
                                     <td class="text-center">
                                         <a href="#" type="button" onclick="editStatus('{{$item->status}}')"  data-bs-toggle="modal" data-bs-target="#modaledit{{ $item->id }}">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                            <i class="fa fa-pencil text-secondary"></i>
                                         </a>
                                     </td>
                                     @endif

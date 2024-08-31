@@ -77,10 +77,10 @@
                                     </td>
                                     <td class="text-center">
                                     <a href="{{ route('edit-spesifikasi',$item->id) }}" type="button" >
-                                        <i class="fas fa-user-edit text-secondary"></i>
+                                        <i class="fa fa-pencil text-secondary"></i>
                                     </a>
                                     <a href="{{ route('delete-spesifikasi',$item->id) }}" type="button" >
-                                        <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                        <i class="cursor-pointer fa fa-trash text-secondary"></i>
                                     </a>
                                     </td>
                                 </tr>
