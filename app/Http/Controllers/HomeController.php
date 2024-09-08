@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Kategori;
 use App\Models\Sales;
 use App\Models\Service;
 use App\Models\Social;
@@ -23,6 +24,7 @@ class HomeController extends Controller
         $data['service'] = Service::get();
         $data['social'] = Social::first();
         $data['sales'] = Sales::first();
+        $data['kategori'] = Kategori::get();
 
         return view('landing.home',$data);
     }

@@ -68,18 +68,59 @@
               </div>
           </div>
       </div>
-      <div class="row">
-        @foreach ($service as $s)
-        <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="row">        
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="services__item">
-                <img src="{{ asset('fe-new/img/services/services-1.png')}}" alt="">
-                <h5>{{ $s->judul }}</h5>
-                <p class="p-services">{{ $s->deskripsi }}.</p>
-                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+              <i class="fa fa-bolt fa-3x"></i>
+                <h5>Proses Cepat</h5>
+                <p class="p-services">Kami mengutamakan pelayanan terhadap customer dengan tidak akan membuat rumit proses pembelian unit Hino</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="services__item">
+              <i class="fa fa-check-circle fa-3x"></i>
+                <h5>SALES BERPENGALAMAN</h5>
+                <p class="p-services">Dibantu dengan sales executive kami yang akan menjelaskan kepada anda mengenai detail Truk Hino</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="services__item">
+              <i class="fa fa-user-circle fa-3x"></i>
+                <h5>SALES SUPPORT</h5>
+                <p class="p-services">Kami mengutamakan pelayanan terhadap customer dengan tidak akan membuat rumit proses pembelian unit Hino</p>
+            </div>
+        </div>
+      </div>
+  </div>
+</section>
+<!-- Services Section End -->
+
+
+<!-- Services Section Begin -->
+<section class="our-best-seller">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="section-title">
+                  <h2>Our Best Seller</h2>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        
+        
+        @foreach ($kategori as $k)
+        <div class="container">
+          <div class="col" style="background:#f7f7f7 ; padding: 12px 30px; margin-bottom: 30px;">{{$k->kategori}}</div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="our-best-seller-item">
+                <img src="{{ asset('assets/img/kategori/'.$k->image ?? '') }}" alt="">
+                <h5>{{ $k->kategori }}</h5>
+                <a href="{{ route('show-kategori',$k->id) }}">MORE <i class="fa fa-long-arrow-right"></i></a>
             </div>
         </div>
         @endforeach
-          
       </div>
   </div>
 </section>

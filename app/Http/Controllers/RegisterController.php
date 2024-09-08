@@ -15,6 +15,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        
         try {
             $new = new User();
             $new->name = $request->name;
@@ -24,13 +25,13 @@ class RegisterController extends Controller
             $randomPassword = Str::random(10);
             $new->pw_text = $randomPassword;
             $new->password = bcrypt($randomPassword);
-    
             if ($new->save()) {
                 return redirect()->back()->with('success','Berhasil Register! Silahkan Simpan dan Gunakan Informasi tersebut untuk login ke akun anda (Stambuk / NIDN : '.$request->stambuk.' Password : '.$randomPassword.')');
             }else{
                 return redirect()->back()->with('failed','Gagal Register!');
             }
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->with('failed','Gagal Register,Mohon hubungi Developer!');
         }
     }

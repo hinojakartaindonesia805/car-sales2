@@ -309,8 +309,8 @@
                     <small id="msg" style="color: red;"></small>
                     <input type="email" name="email" placeholder="Email"  required/>
                     <input type="number" name="phone" placeholder="N0 Handphone"  required/>
-                    <input type="password" name="phone" placeholder="Password"  required/>
-                  <button type="submit" disabled>Sign Up</button>
+                    <input type="password" name="password" placeholder="Password"  required/>
+                  <button type="submit" id="submitRegister" disabled>Sign Up</button>
               </form>
         </div>
         <div class="toggle-container">
@@ -334,21 +334,16 @@
 $('.dropify').dropify();
 $('.select2').select2();
 const container = document.getElementById('container');
-const registerBtn = document.getElementById('register');
-const loginBtn = document.getElementById('login');
+const registerBtn = document.getElementById('submitRegister');
 
 registerBtn.addEventListener('click', () => {
     container.classList.add("active");
-});
-
-loginBtn.addEventListener('click', () => {
-    container.classList.remove("active");
 });
 </script>
 
 <script>
   window.onload = function() {
-      var input = document.querySelector('input[name="stambuk"]');
+      var input = document.querySelector('input[name="phone"]');
       var button = document.querySelector('button[type="submit"]');
       var msg = document.getElementById('msg');
 
