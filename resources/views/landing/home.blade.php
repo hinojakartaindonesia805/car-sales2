@@ -107,20 +107,17 @@
           </div>
       </div>
       <div class="row">
-        
-        
-        @foreach ($kategori as $k)
         <div class="container">
-          <div class="col" style="background:#f7f7f7 ; padding: 12px 30px; margin-bottom: 30px;">{{$k->kategori}}</div>
+          @foreach ($kategori as $k)
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="our-best-seller-item">
                 <img src="{{ asset('assets/img/kategori/'.$k->image ?? '') }}" alt="">
                 <h5>{{ $k->kategori }}</h5>
                 <a href="{{ route('show-kategori',$k->id) }}">MORE <i class="fa fa-long-arrow-right"></i></a>
             </div>
+            @endforeach
         </div>
-        @endforeach
       </div>
   </div>
 </section>
