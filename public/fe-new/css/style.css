@@ -2076,15 +2076,30 @@ ol {
 	font-size: 15px;
 	color: #121212;
 	height: 40px;
-	width: 85px;
+	width: 110px;
 	line-height: 40px;
 	text-align: center;
-	border-radius: 10%;
 	border: 1px solid #ebebeb;
 	display: inline-block;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
+	outline : auto
+}
+
+.more-info {
+	font-size: 15px;
+	color: #121212;
+	height: 40px;
+	width: 110px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #ebebeb;
+	display: inline-block;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	outline : auto
 }
 
 /*---------------------

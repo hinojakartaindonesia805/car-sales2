@@ -38,6 +38,7 @@ class CarController extends Controller
         try {
             $new = new Car();
             $new->nama = $request->cars;
+            $new->deskripsi = $request->deskripsi;
             $new->slug = Str::slug($request->cars);
             $new->id_kategori = $request->id_kategori;
             if ($request->hasFile('foto')) {

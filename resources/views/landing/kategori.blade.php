@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Daftar Truck {{ $kat->kategori }}</h2>
+                    <h2>Daftar {{ $kat->kategori }}</h2>
                     <div class="breadcrumb__links">
                         <a href="/"><i class="fa fa-home"></i> Home</a>
                         <span>About</span>
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="car__filter__option__item">
-                                <h6>Daftar Truck {{ $kat->kategori }}</h6>
+                                <h6>Daftar {{ $kat->kategori }}</h6>
                             </div>
                         </div>
                     </div>
@@ -76,8 +76,11 @@
                                         </div>
                                         <div class="car__item__text">
                                             <div class="car__item__text__inner">
-                                                <div class="label-date">{{ $kat->kategori }}</div>
                                                 <h5><a href="#">{{ $item->nama }}</a></h5>
+                                                <h6>{{ $item->harga }}</h6>
+                                                <div class="more-info" style="margin-top: 10px;">
+                                                    <a style="color:#121212" href="{{ route('detail-cars',$item->slug) }}">More Info</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

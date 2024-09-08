@@ -114,7 +114,7 @@
             <div class="our-best-seller-item">
                 <img src="{{ asset('assets/img/kategori/'.$k->image ?? '') }}" alt="">
                 <h5>{{ $k->kategori }}</h5>
-                <a href="{{ route('show-kategori',$k->id) }}">MORE <i class="fa fa-long-arrow-right"></i></a>
+                <a href="{{ route('show-kategori',$k->id) }}">MORE INFO</a>
             </div>
             @endforeach
         </div>

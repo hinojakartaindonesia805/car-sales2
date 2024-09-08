@@ -57,8 +57,15 @@
                                         @csrf
                                         <input type="hidden" class="form-control" name="id_kategori" value="{{ $kat->id }}">
                                     <div class="mb-3">
-                                        <label for="">Cars</label>
-                                        <input type="text" class="form-control" placeholder="cars" name="cars" id="cars" aria-label="cars" aria-describedby="cars" value="{{ old('cars') }}">
+                                        <label for="">Nama Kendaraan</label>
+                                        <input type="text" class="form-control" placeholder="Nama Kendaraan" name="cars" id="cars" aria-label="cars" aria-describedby="cars" value="{{ old('cars') }}">
+                                        @error('cars')
+                                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="">Deskripsi</label>
+                                        <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsi" id="deskripsi" aria-label="deskripsi" aria-describedby="deskripsi" value="{{ old('deskripsi') }}">
                                         @error('cars')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -95,7 +102,11 @@
                                         Foto
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Car
+                                        Nama Kendaraan
+                                    </th>
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Deskripsi
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Slug
@@ -119,6 +130,9 @@
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->nama }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->deskripsi }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $item->slug }}</p>

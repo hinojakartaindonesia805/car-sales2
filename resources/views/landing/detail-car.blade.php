@@ -95,7 +95,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Daftar Truck {{ $kat->kategori }}</h2>
+                        <h2>Daftar {{ $kat->kategori }}</h2>
                         <div class="breadcrumb__links">
                             <a href="/"><i class="fa fa-home"></i> Home</a>
                             <a href="#">Kategori</a>
