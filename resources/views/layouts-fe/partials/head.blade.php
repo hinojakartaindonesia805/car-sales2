@@ -1,5 +1,4 @@
 <meta charset="UTF-8">
-<meta name="description" content="HVAC Template">
 <meta name="keywords" content="HVAC, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,7 +15,7 @@
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HINO Jakarta Indonesia">
-<meta name="twitter:description" content="HVAC Template">
+{{-- <meta name="twitter:description" content="HVAC Template"> --}}
 <meta name="twitter:image" content="{{ asset('assets/img/thumbnail/thumbnail-hino.png') }}">
 
 <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('assets/img/thumbnail/thumbnail-hino.png') }}" />
