@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /dashboard
+Allow: /
+
+Sitemap: https://www.hinojakartaindonesia.com/sitemap.xml
