@@ -14,6 +14,9 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SpesifikasiController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -51,22 +54,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/tambah-cars', [CarController::class, 'store'])->name('tambah-cars');
 	Route::post('/update-cars/{id}', [CarController::class, 'update'])->name('update-cars');
 	Route::get('/delete-cars/{id}', [CarController::class, 'destroy'])->name('delete-cars');
-	
+
 	Route::get('/list-spesifikasi/{id}', [SpesifikasiController::class, 'index'])->name('list-spesifikasi');
 	Route::get('/tambah-spesifikasi/{id}', [SpesifikasiController::class, 'create'])->name('tambah-spesifikasi');
 	Route::post('/store-spesifikasi', [SpesifikasiController::class, 'store'])->name('store-spesifikasi');
 	Route::get('/edit-spesifikasi/{id}', [SpesifikasiController::class, 'edit'])->name('edit-spesifikasi');
 	Route::post('/update-spesifikasi/{id}', [SpesifikasiController::class, 'update'])->name('update-spesifikasi');
 	Route::get('/delete-spesifikasi/{id}', [SpesifikasiController::class, 'destroy'])->name('delete-spesifikasi');
-	
-	
+
+
 	Route::get('/list-berita', [BeritaController::class, 'index'])->name('list-berita');
 	Route::get('/tambah-berita', [BeritaController::class, 'create'])->name('tambah-berita');
 	Route::post('/store-berita', [BeritaController::class, 'store'])->name('store-berita');
 	Route::get('/edit-berita/{id}', [BeritaController::class, 'edit'])->name('edit-berita');
 	Route::post('/update-berita/{id}', [BeritaController::class, 'update'])->name('update-berita');
 	Route::get('/delete-berita/{id}', [BeritaController::class, 'destroy'])->name('delete-berita');
-	
+
 	Route::get('/setting', [BannerController::class, 'index'])->name('setting');
 	Route::post('/update-setting-banner', [BannerController::class, 'settingBanner'])->name('update-setting-banner');
 	Route::post('/update-setting-about', [BannerController::class, 'settingTentangKami'])->name('update-setting-about');
@@ -88,7 +91,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/delete-user/{id}', [InfoUserController::class, 'deleteUser'])->name('delete-user');
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
-	
+
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
@@ -113,3 +116,48 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/login', function () {
     return view('session/login-session');
 })->name('login');
+
+
+Route::get('/sitemap', function () {
+    // Buat objek sitemap
+    $sitemap = Sitemap::create();
+
+    // Tambahkan rute statis
+    $sitemap->add(Url::create(route('home'))->setPriority(1.0));
+
+    // Tambahkan rute dinamis: Kategori
+    $categories = App\Models\Kategori::all(); // Ambil semua kategori dari database
+    foreach ($categories as $category) {
+        $sitemap->add(
+            Url::create(route('show-kategori', ['id' => $category->id]))
+                ->setPriority(0.8)
+                ->setLastModificationDate($category->updated_at)
+        );
+    }
+
+    // Tambahkan rute dinamis: Cars
+    $cars = App\Models\Car::all(); // Ambil semua data mobil
+    foreach ($cars as $car) {
+        $sitemap->add(
+            Url::create(route('detail-cars', ['id' => $car->id]))
+                ->setPriority(0.7)
+                ->setLastModificationDate($car->updated_at)
+        );
+    }
+
+    // Tambahkan rute dinamis: Berita
+    $beritas = App\Models\Berita::all(); // Ambil semua berita
+    foreach ($beritas as $berita) {
+        $sitemap->add(
+            Url::create(route('detail-berita', ['id' => $berita->id]))
+                ->setPriority(0.9)
+                ->setLastModificationDate($berita->updated_at)
+        );
+    }
+
+    // Simpan sitemap ke file sitemap.xml di folder public
+    $sitemap->writeToFile(public_path('sitemap.xml'));
+
+    return 'Sitemap berhasil dibuat!';
+});
+
