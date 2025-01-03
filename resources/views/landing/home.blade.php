@@ -63,7 +63,7 @@
             <div class="col-lg-2">
                 {{-- <div class="chooseus__text mt-3"> --}}
                     {{-- <div class="card" style="width: 18rem;"> --}}
-                      <img class="card-img-top" src="{{ asset('assets/img/sales/'.$sales->foto ?? '') }}" style="max-width: 250px" alt="">
+                      <img class="card-img-top" src="{{ asset('assets/img/sales/'.$sales->foto ?? '') }}" style="max-width: 300px" alt="">
                     {{-- </div> --}}
                   {{-- </div> --}}
             </div>
@@ -84,7 +84,7 @@
                     @php
                         $social = \App\Models\Social::first();
                     @endphp
-                      <a href="{{ $social->link_whatsapp ?? '#' }}" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                      <a href="{{ $social->link_wa ?? '#' }}" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
                       <a href="{{ $social->link_facebook ?? '#' }}" class="facebook"><i class="fa fa-facebook"></i></a>
                       <a href="{{ $social->link_twiter ?? '#' }}" class="twitter"><i class="fa fa-twitter"></i></a>
                       <a href="{{ $social->link_gmail ?? '#' }}" class="google"><i class="fa fa-google"></i></a>

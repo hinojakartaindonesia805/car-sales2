@@ -198,13 +198,13 @@
 
     <!-- Header Section Begin -->
     @include('layouts-fe.partials.navbar')
-  
+
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
     @yield('content-fe')
 
-    
+
 
     <!-- Footer Section Begin -->
     @include('layouts-fe.partials.footer')
