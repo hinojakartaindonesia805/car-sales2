@@ -55,6 +55,46 @@
   </button>
 </div>
 
+
+<section class="footer set-bg" data-setbg="{{asset('fe-new/img/footer-bg.jpg')}}">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="chooseus__text mt-3">
+                    <div class="card" style="width: 18rem;">
+                      <img class="card-img-top" src="{{ asset('assets/img/sales/'.$sales->foto ?? '') }}" style="max-width: 250px" alt="">
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="footer__widget">
+                    <h2 style="color: #ffffff; font-weight: 700;">Sales Kami</h2>
+                    <h5 style="color: #ffffff; font-weight: 700;">Nama Sales: {{ $sales->nama }}</h5>
+                    <h5 style="color: #ffffff; font-weight: 700;">No WhatsApp: {{ $sales->no_wa }}</h5>
+                    <div style="color: white !important; font-weight: 700;">
+                        {!! $sales->detail !!}
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="footer__widget">
+                  <div class="footer__social">
+                    @php
+                        $social = \App\Models\Social::first();
+                    @endphp
+                      <a href="{{ $social->link_whatsapp ?? '#' }}" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                      <a href="{{ $social->link_facebook ?? '#' }}" class="facebook"><i class="fa fa-facebook"></i></a>
+                      <a href="{{ $social->link_twiter ?? '#' }}" class="twitter"><i class="fa fa-twitter"></i></a>
+                      <a href="{{ $social->link_gmail ?? '#' }}" class="google"><i class="fa fa-google"></i></a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
 <!-- Hero Section End -->
 
 <!-- Services Section Begin -->
@@ -68,7 +108,7 @@
               </div>
           </div>
       </div>
-      <div class="row">        
+      <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="services__item">
               <i class="fa fa-bolt fa-3x"></i>
@@ -147,7 +187,7 @@
 <!-- Chooseus Section End -->
 
 <!-- Chooseus Section Begin -->
-<section class="chooseus spad" style="padding-top:40px">
+{{-- <section class="chooseus spad" style="padding-top:40px">
   <div class="container">
       <div class="row">
           <div class="col-lg-6">
@@ -169,7 +209,7 @@
           </div>
       </div>
   </div>
-</section>
+</section> --}}
 <!-- Chooseus Section End -->
 
 <!-- Latest Blog Section Begin -->
@@ -209,7 +249,7 @@
               </div>
           </div>
         @endforeach
-          
+
       </div>
   </div>
 </section>

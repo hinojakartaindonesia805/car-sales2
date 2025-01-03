@@ -1455,6 +1455,10 @@ ol {
 	margin-right: 0;
 }
 
+.footer__social a.whatsapp {
+	background: #46c658;
+}
+
 .footer__social a.facebook {
 	background: #324975;
 }
