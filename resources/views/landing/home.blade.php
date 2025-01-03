@@ -61,11 +61,11 @@
 
         <div class="row">
             <div class="col-lg-2">
-                <div class="chooseus__text mt-3">
-                    <div class="card" style="width: 18rem;">
+                {{-- <div class="chooseus__text mt-3"> --}}
+                    {{-- <div class="card" style="width: 18rem;"> --}}
                       <img class="card-img-top" src="{{ asset('assets/img/sales/'.$sales->foto ?? '') }}" style="max-width: 250px" alt="">
-                    </div>
-                  </div>
+                    {{-- </div> --}}
+                  {{-- </div> --}}
             </div>
             <div class="col-lg-7">
                 <div class="footer__widget">
